@@ -1,0 +1,91 @@
+autostart = False
+version = 0.8.6
+[127.0.0.1:7200]
+    workingdir = C:\Users\machine\AppData\Local\Temp
+    udp = 10001
+    [[3725]]
+        image = C:\Users\machine\Desktop\c3725-advipservicesk9-mz.124-3.image
+        ram = 128
+        sparsemem = True
+        ghostios = True
+    [[ROUTER R1]]
+        model = 3725
+        console = 2101
+        aux = 2501
+        cnfg = configs\R1.cfg
+        slot1 = NM-4T
+        s1/0 = R2 s1/0
+        s1/2 = R3 s1/2
+        x = -346.0
+        y = -43.0
+        z = 1.0
+    [[ROUTER R2]]
+        model = 3725
+        console = 2102
+        aux = 2502
+        cnfg = configs\R2.cfg
+        slot1 = NM-4T
+        s1/0 = R1 s1/0
+        s1/1 = R3 s1/1
+        x = 49.0
+        y = -218.0
+        z = 1.0
+    [[ROUTER R3]]
+        model = 3725
+        console = 2103
+        aux = 2503
+        cnfg = configs\R3.cfg
+        slot1 = NM-4T
+        s1/1 = R2 s1/1
+        s1/2 = R1 s1/2
+        x = 166.0
+        y = -10.0
+        z = 1.0
+[GNS3-DATA]
+    configs = configs
+    [[NOTE 1]]
+        text = "Network:192.168.1.0\nprotocol: ebgp"
+        x = -199.0
+        y = -184.0
+    [[NOTE 2]]
+        text = "lo0:10.10.10.10"
+        x = -341.0
+        y = -97.0
+    [[NOTE 3]]
+        text = "lo0:20.20.20.20"
+        x = 79.0
+        y = -270.0
+    [[NOTE 4]]
+        text = "Network:192.168.2.0\nprotocol: ebgp"
+        x = -171.0
+        y = 26.0
+    [[NOTE 5]]
+        text = "Network:172.168.3.0\nprotocol: ibgp"
+        x = 212.0
+        y = -101.0
+    [[NOTE 6]]
+        text = "ISP Netowrk"
+        x = -446.0
+        y = -68.0
+    [[NOTE 7]]
+        text = "lo0:30.30.30.30"
+        x = 212.0
+        y = 49.0
+    [[NOTE 8]]
+        text = "College Network"
+        x = 160.0
+        y = -329.0
+    [[SHAPE 1]]
+        type = ellipse
+        x = -28.0
+        y = -355.0
+        width = 488.0
+        height = 479.0
+        border_style = 2
+    [[SHAPE 2]]
+        type = ellipse
+        x = -460.0
+        y = -168.0
+        width = 297.0
+        height = 273.0
+        border_style = 2

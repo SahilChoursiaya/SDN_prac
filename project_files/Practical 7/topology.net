@@ -1,0 +1,100 @@
+autostart = False
+version = 0.8.6
+[127.0.0.1:7200]
+    workingdir = C:\Users\machine\AppData\Local\Temp
+    udp = 10001
+    [[3725]]
+        image = C:\Users\machine\Desktop\c3725-advipservicesk9-mz.124-3.image
+        ram = 128
+        sparsemem = True
+        ghostios = True
+    [[ROUTER R4]]
+        model = 3725
+        console = 2104
+        aux = 2504
+        cnfg = configs\R4.cfg
+        slot1 = NM-4T
+        s1/1 = R2 s1/1
+        x = -132.0
+        y = 181.0
+        z = 1.0
+        hx = 7.5
+        hy = -23.0
+    [[ROUTER R1]]
+        model = 3725
+        console = 2101
+        aux = 2501
+        cnfg = configs\R1.cfg
+        slot1 = NM-4T
+        s1/0 = R2 s1/0
+        x = -409.0
+        y = -50.0
+        z = 1.0
+    [[ROUTER R2]]
+        model = 3725
+        console = 2102
+        aux = 2502
+        cnfg = configs\R2.cfg
+        slot1 = NM-4T
+        s1/0 = R1 s1/0
+        s1/1 = R4 s1/1
+        s1/2 = R3 s1/2
+        x = -128.0
+        y = -46.0
+        z = 1.0
+    [[ROUTER R3]]
+        model = 3725
+        console = 2103
+        aux = 2503
+        cnfg = configs\R3.cfg
+        slot1 = NM-4T
+        s1/2 = R2 s1/2
+        x = 172.0
+        y = -48.0
+        z = 1.0
+[GNS3-DATA]
+    configs = configs
+    [[NOTE 1]]
+        text = "Protocol: eigrp"
+        x = -72.0
+        y = 124.0
+    [[NOTE 2]]
+        text = "Protocol: ospf"
+        x = 9.0
+        y = -5.0
+    [[NOTE 3]]
+        text = "ROUTER 1"
+        x = -420.0
+        y = 390.0
+    [[NOTE 4]]
+        text = "lo0: 3.3.3.3\nIP: 23.1.1.3"
+        x = 167.0
+        y = -112.0
+    [[NOTE 5]]
+        text = "Protocol: RIP"
+        x = -257.0
+        y = 26.0
+    [[NOTE 6]]
+        text = "Network: 23.1.1.0\nsubmask: 255.255.255.0"
+        x = -14.0
+        y = -96.0
+    [[NOTE 7]]
+        text = "Network: 24.1.1.0\nsubmask: 255.255.255.0"
+        x = -76.0
+        y = 76.0
+    [[NOTE 8]]
+        text = "lo0: 4.4..4.4\nIP: 24.1.1.4"
+        x = -141.0
+        y = 220.0
+    [[NOTE 9]]
+        text = "lo0: 1.1.1.1\nIP: 12.1.1.1"
+        x = -441.0
+        y = -109.0
+    [[NOTE 10]]
+        text = "Network: 12.1.1.0\nsubmask: 255.255.255.0"
+        x = -322.0
+        y = -82.0
+    [[NOTE 11]]
+        text = "lo0: 2.2.2.2\nIP: 12.1.1.2\nIP: 24.1.1.2\nIP: 23.1.1.2"
+        x = -136.0
+        y = -142.0

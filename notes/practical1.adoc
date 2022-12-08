@@ -1,0 +1,121 @@
+= Practical 1 Notes(NAME: Simulating RIP)
+
+== Creating Network In GNS3
+see Image Topology
+
+== Assigning IP to router
+To assigning IP to routers use the code below
+
+[,shell]
+----
+
+# lines following '#' are comment
+# enable terminal
+en
+
+# configure terminal
+conf t
+
+# Set terminal to use interface
+# interface <interface>
+int f0/0
+
+# Add ip to current interface
+ip add 192.168.1.1 255.255.255.0
+
+# Command terminal to not shutdown interface
+# no shutdown
+no sh
+
+----
+
+To assign additional IP to different interface of same router 
+continue with 
+
+[,shell]
+----
+
+# Set terminal to use different interface
+int f0/1
+
+ip add 192.168.1.2 255.255.255.0
+
+no sh
+
+----
+
+== Seeing IP of Device
+To See IP assigning to router use 
+
+[,shell]
+----
+
+# do show ip brief
+do sh ip br
+
+----
+
+IP assigned to different interfaces should show different IP
+assigned
+
+== Assigning Network Address With RIP
+Devices will be able to ping devices there neighbour in case R1->R2 
+but they would still be unable to see device on different network
+such as R1->R3.
+
+To enable routing to other networks we use RIP protocol
+NOTE: RIP or Routing Information Protocol allow devices route packets dynamically
+with best possible path.
+[,shell]
+----
+
+# Enable RIP 
+router rip
+# Set RIP to use version 2 for routing 
+version 2
+
+# configure rip with network 
+# network <NETWORK_ADDRESS>
+network 192.168.1.0
+
+# If device in part of additional network follow with 
+network 192.168.2.0
+
+----
+
+== Seeing Device Route
+To see the route created by RIP use
+
+[,shell]
+----
+
+do sh ip route
+
+----
+ 
+== APPENDIX
+
+=== Exit Terminal
+In case command not working like expected or in wrong mode type 
+
+[,shell]
+----
+exit
+----
+
+to return to fresh console and repeat commands
+
+=== Drop IP of interface
+To drop IP in case of wrong IP assigned
+[,shell]
+----
+
+no ip add
+
+----
+
+=== Ping unsuccessfull
+Check route with *do sh ip route* and check it against topology of network
+and their interface
+Check IP assigned to correct interface 
+*do sh ip int br* if incorrect reassign.

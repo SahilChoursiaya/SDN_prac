@@ -1,0 +1,80 @@
+autostart = False
+version = 0.8.6
+[127.0.0.1:7200]
+    workingdir = C:\Users\machine\AppData\Local\Temp
+    udp = 10001
+    [[3725]]
+        image = C:\Users\machine\Desktop\sdn\c3725-advipservicesk9-mz.124-3.image
+        ram = 128
+        sparsemem = True
+        ghostios = True
+    [[ROUTER R1]]
+        model = 3725
+        console = 2101
+        aux = 2501
+        cnfg = configs\R1.cfg
+        f0/0 = R2 f0/0
+        x = -243.0
+        y = 44.0
+        z = 1.0
+    [[ROUTER R2]]
+        model = 3725
+        console = 2102
+        aux = 2502
+        cnfg = configs\R2.cfg
+        f0/0 = R1 f0/0
+        f0/1 = R3 f0/0
+        x = -59.0
+        y = -123.0
+        z = 1.0
+    [[ROUTER R3]]
+        model = 3725
+        console = 2103
+        aux = 2503
+        cnfg = configs\R3.cfg
+        f0/0 = R2 f0/1
+        x = 115.0
+        y = 49.0
+        z = 1.0
+[GNS3-DATA]
+    configs = configs
+    [[NOTE 1]]
+        text = "            IP : 192.168.1.1\nSub mask : 255.255.255.0"
+        x = -305.0
+        y = 105.0
+    [[NOTE 2]]
+        text = "            IP : 192.168.2.3\nSub mask : 255.255.255.0"
+        x = 67.0
+        y = 106.0
+    [[NOTE 3]]
+        text = "            IP : 192.168.1.2\n            IP : 192.168.2.2\nSub mask : 255.255.255.0"
+        x = -110.0
+        y = -204.0
+    [[NOTE 4]]
+        text = "Network: 192.168.2.0"
+        x = 97.0
+        y = -56.0
+    [[NOTE 5]]
+        text = "Network: 192.168.1.0"
+        x = -288.0
+        y = -53.0
+    [[NOTE 6]]
+        text = "f0/0"
+        x = 0.32128546941
+        y = -1.06732790395
+        interface = R3 f0/0
+    [[NOTE 7]]
+        text = "f0/1"
+        x = 65.6787145306
+        y = 45.0673279039
+        interface = R2 f0/1
+    [[NOTE 8]]
+        text = "f0/0"
+        x = 3.30661446858
+        y = 48.801172655
+        interface = R2 f0/0
+    [[NOTE 9]]
+        text = "f0/0"
+        x = 62.6933855314
+        y = -4.80117265499
+        interface = R1 f0/0

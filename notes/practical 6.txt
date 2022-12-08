@@ -1,0 +1,87 @@
+# R1
+
+conf t 
+int lo0
+ip add 10.10.10.10 255.255.255.0
+no sh
+int s1/0
+ip add 192.168.1.1 255.255.255.0
+no sh
+int s1/2
+ip add 192.168.2.1 255.255.255.0
+no sh
+
+# R2
+
+conf t 
+int lo0
+ip add 20.20.20.20 255.255.255.0
+no sh
+int s1/0
+ip add 192.168.1.2 255.255.255.0
+no sh
+int s1/1
+ip add 172.168.3.2 255.255.255.0
+no sh
+
+# R3
+
+conf t 
+int lo0
+ip add 30.30.30.30 255.255.255.0
+no sh
+int s1/1
+ip add 172.168.3.3 255.255.255.0
+no sh
+int s1/2
+ip add 192.168.2.3 255.255.255.0
+no sh
+
+=# Configuring EIGRP 
+
+# R2
+router eigrp 1
+network 172.168.3.0 0.0.0.255
+network 20.20.20.0 0.0.0.255
+
+# R3
+router eigrp 1
+network 172.168.3.0 0.0.0.255
+network 30.30.30.0 0.0.0.255
+	
+=#Configuring IBGP Neigbourship
+
+# R2
+router bgp 64512
+neighbor 172.168.3.3 remote-as 64512
+neighbor 172.168.3.3 update-source lo0
+
+# R3
+router bgp 64512
+neighbor 172.168.3.2 remote-as 64512
+neighbor 172.168.3.2 update-source lo0
+
+=#Configure EBGP neighbor
+# R1
+router bgp 200
+neighbor 192.168.1.2 remote-as 64512
+neighbor 192.168.2.3 remote-as 64512
+network 10.10.10.0
+
+# R2
+router bgp 64512
+neighbor 192.168.1.1 remote-as 64512
+network 20.20.20.0
+network 172.168.3.0
+
+# R3
+router bgp 64512
+neighbor 192.168.2.1 remote-as 64512
+network 30.30.30.0
+network 172.168.3.0
+
+=# Output
+
+do sh ip int br
+
+do sh ip bgp summary
